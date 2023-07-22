@@ -19,8 +19,15 @@ NEWSPIDER_MODULE = "retailing.spiders"
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+# PROXY_POOL_ENABLED = True
+
+
+# Maximum number of times to retry, in addition to the first download
+# RETRY_TIMES = 0
+# MAX_RETRY = 2
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -50,9 +57,18 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "retailing.middlewares.RetailingDownloaderMiddleware": 543,
-#}
+
+# ROTATING_PROXY_LIST_PATH = './proxies.txt'
+
+# DOWNLOADER_MIDDLEWARES = {
+#    "retailing.middlewares.RetryMiddleware": 543,
+#    'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
+#    'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
+#     'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+#     'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+# }
+
+# ROTATING_PROXY_BAN_POLICY = 'retailing.policy.MyBanPolicy'
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
