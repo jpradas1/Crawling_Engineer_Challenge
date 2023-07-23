@@ -101,14 +101,14 @@ class RetailSpider(scrapy.Spider):
         inventory = [json.loads(x) for x in response.xpath('//div[@class="grid-tile"]/@data-puma-analytics').getall()]
         inventory = [x['products'][0]['inventory'] for x in inventory]
 
-        for url, inv in zip(products[:2], inventory[:2]):
+        for url, inv in zip(products, inventory):
             follow_url = self.start_urls[0][:-1] + url
             yield response.follow(follow_url, callback = self.product_general,
                                   cb_kwargs={"inventory": inv})
 
     def parse(self, response):
         
-        categories = [response.xpath('//li[@class="p-nav-item js-nav-item"]//div[@class]/a/@href').getall()[0]]
+        categories = response.xpath('//li[@class="p-nav-item js-nav-item"]//div[@class]/a/@href').getall()
         
         for url in categories:
             follow_url = response.url[:-1] + url
