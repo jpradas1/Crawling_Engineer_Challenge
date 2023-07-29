@@ -66,7 +66,7 @@ CONCURRENT_REQUESTS = 32
 #    'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
 #     'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
 #     'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
-# }
+# }---
 
 # ROTATING_PROXY_BAN_POLICY = 'retailing.policy.MyBanPolicy'
 
