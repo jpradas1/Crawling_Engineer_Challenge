@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "retailing.spiders"
 #USER_AGENT = "retailing (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # PROXY_POOL_ENABLED = True
 
