@@ -4,7 +4,7 @@ import json, re
 from retailing.items import RetailingItem
 
 class RetailSpider(scrapy.Spider):
-    name = "puma2"
+    name = "puma"
     start_urls = []
 
     base_url = 'https://eu.puma.com'
@@ -57,23 +57,27 @@ class RetailSpider(scrapy.Spider):
 
         Items = RetailingItem()
 
+        Items['id'] = int(re.findall('\d{6}', response.url)[-1])
         Items['title'] = data['productName']
         Items['brand'] = 'PUMA'
         Items['description'] = data['shortDescription']
+
+        Items['pid'] = int(data['id'])
+        Items['color'] = data['variationAttributes'][0]['selectedValue']['displayValue']
         Items['current_price'] = float(data['price']['sales']['value'])
         Items['original_price'] = Items['current_price']
+        Items['currency'] = 'EUR'
         
         if data['price']['list']:
             Items['original_price'] = float(data['price']['list']['value'])
 
         Items['inventory'] = data['analyticsData']['inventory']
-
-        Items['URL_images'] = [x['img']['src'] for x in images['pictures']]
-        Items['id'] = data['id']
-        Items['color'] = data['variationAttributes'][0]['selectedValue']['displayValue']
         sizes = [x['values'] for x in data['variationAttributes']][-1]
         Items['sizes'] = [x['displayValue'] for x in sizes]
         Items['category_path'] = data['analyticsData']['category'].replace('-', ' > ')
+
+        Items['URL_images'] = [x['img']['src'] for x in images['pictures']]
+        Items['URL_product'] = data['variationAttributes'][0]['selectedValue']['urlProductShowNoSize']
 
         yield Items
 

@@ -61,11 +61,6 @@ CONCURRENT_REQUESTS = 32
 # ROTATING_PROXY_LIST_PATH = './proxies.txt'
 
 # DOWNLOADER_MIDDLEWARES = {
-#    "retailing.middlewares.RetryMiddleware": 543,
-#    'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
-#    'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
-#     'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
-#     'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 # }---
 
 # ROTATING_PROXY_BAN_POLICY = 'retailing.policy.MyBanPolicy'
@@ -78,9 +73,9 @@ CONCURRENT_REQUESTS = 32
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "retailing.pipelines.RetailingPipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "retailing.pipelines.RetailingPipeline": 500,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
