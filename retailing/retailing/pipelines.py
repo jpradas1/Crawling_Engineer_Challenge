@@ -6,8 +6,15 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from pymongo import MongoClient
 
 
 class RetailingPipeline:
+    def open_spider(self, spider):
+        pass
+
     def process_item(self, item, spider):
-        return item
+        pass
+
+    def close_spider(self, spider):
+        pass

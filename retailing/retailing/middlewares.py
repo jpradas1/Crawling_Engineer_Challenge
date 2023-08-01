@@ -8,39 +8,6 @@ from scrapy import signals
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
-from scrapy.exceptions import IgnoreRequest
-
-class RetryMiddleware:
-    def __init__(self, max_retries=2):
-        self.max_retries = max_retries
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        settings = crawler.settings
-        max_retries = settings.getint('MAX_RETRIES', 2)
-        return cls(max_retries)
-
-    def process_request(self, request, spider):
-        retries = request.meta.get('RETRY_TIMES', 0)
-        if retries < self.max_retries:
-            return None
-        else:
-            raise IgnoreRequest(f"Max retries exceeded for {request.url}")
-
-    def process_response(self, request, response, spider):
-        # Check if response status indicates a failure (e.g., 404, 500, etc.)
-        if response.status >= 400:
-            retries = request.meta.get('RETRY_TIMES', 0)
-            if retries < self.max_retries:
-                retryreq = request.copy()
-                retryreq.meta['RETRY_TIMES'] = retries + 1
-                retryreq.dont_filter = True  # Avoid filtering the retry request
-                return retryreq
-            else:
-                raise IgnoreRequest(f"Max retries exceeded for {request.url}")
-        return response
-
-
 class RetailingSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
