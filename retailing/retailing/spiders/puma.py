@@ -28,11 +28,6 @@ class RetailSpider(scrapy.Spider):
 
         # encoding
         'FEED_EXPORT_ENCODING': 'utf-8',
-
-        # saving data into json
-        # 'FEED_URI': 'puma.json',
-        # 'FEED_FORMAT': 'json'
-
     }
 
     cgid_product_section = ['womens-shoes', 'womens-clothing', 
@@ -49,7 +44,7 @@ class RetailSpider(scrapy.Spider):
 
     def __init__(self):
         for cgid in self.cgid_product_section:
-            self.start_urls.append(self.request_product_url.format(cgid, 0))
+            self.start_urls.append(self.request_product_url.format(cgid, -1))
 
     def crawl_from_api(self, response):
         data = json.loads(response.body)['product']
@@ -101,10 +96,10 @@ class RetailSpider(scrapy.Spider):
                 yield Request(url=pid_url, headers=self.HEADERS, callback=self.get_id_from_api)
 
         
-        #     pid_extract = lambda x: x.split('cgid=')[1].split('&')[0]
-        #     start_extract = lambda n: int(n.split('start=')[1].split('&')[0]) + 35
+            cgid_extract = lambda x: x.split('cgid=')[1].split('&')[0]
+            start_extract = lambda n: int(n.split('start=')[1].split('&')[0]) + 36
 
-        #     pid, page_number = pid_extract(response.url), start_extract(response.url)
-        #     next_page = self.request_product_url.format(pid, page_number)
+            cgid, page_number = cgid_extract(response.url), start_extract(response.url)
+            next_page = self.request_product_url.format(cgid, page_number)
 
-        #     yield response.follow(next_page, callback = self.parse)
+            yield response.follow(next_page, callback = self.parse)
