@@ -13,7 +13,7 @@ This repository extract data from two clothing websites [Adidas](https://www.adi
 - Category paths leading to the product (e.g. Women > Footwear > Running)
 
 ## Running the Code
-To run this scraper properly, we follow the following steps.
+To run this scraper properly, follow these steps.
 ### Virtual Environment
 First we need a virtual environment to display this project. We could use conda or the python module venv. We use the last one.
 ```
@@ -30,7 +30,7 @@ venv\Scripts\activate
 ```
 ### Installing Libraries
 ```
-pip install scrapy
+pip install scrapy pymongo
 ```
 ### Ride Spiders
 Finally to run the scraper we make
