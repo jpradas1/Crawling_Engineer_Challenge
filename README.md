@@ -40,8 +40,7 @@ Before to run any spider we need a MongoDB server in order to store our data. Th
 sudo docker pull mongo
 sudo docker run -d -p 27017:27017 --name mongodb mongo
 ```
-- Puma scraper.
-Because puma crawler needs the Mongo server, we run:
+Because Puma crawler needs the Mongo server, we run:
 ```
 scrapy crawl -s MONGODB_URI="mongodb://localhost:27017/" -s MONGODB_DATABASE="Products" puma
 ```
