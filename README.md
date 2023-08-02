@@ -53,4 +53,7 @@ And to ignore the log output
 scrapy crawl -s MONGODB_URI="mongodb://localhost:27017/" -s MONGODB_DATABASE="Products" puma 2>/dev/null
 ```
 ## Dataset
-The final extrated data is located in the folder [retailing](https://github.com/jpradas1/Crawling_Engineer_Challenge/tree/main/retailing) in json format ([adidas.json](https://github.com/jpradas1/Crawling_Engineer_Challenge/blob/main/retailing/adidas.json) & [puma.json](https://github.com/jpradas1/Crawling_Engineer_Challenge/blob/main/retailing/puma.json))
+The final extrated data is located in the folder [retailing](https://github.com/jpradas1/Crawling_Engineer_Challenge/tree/main/retailing) in json format [adidas.json](https://github.com/jpradas1/Crawling_Engineer_Challenge/blob/main/retailing/adidas.json) for adidas scraper. However for Puma the compress file [products](https://github.com/jpradas1/Crawling_Engineer_Challenge/blob/main/products.tar.gz) contains all data extracted from its website, which has 24544 items.
+```
+tar -xzvf products.tar.gz
+```
