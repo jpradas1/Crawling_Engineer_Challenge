@@ -38,12 +38,12 @@ Before to run any spider we need a MongoDB server in order to store our data. Th
 sudo docker pull mongo
 sudo docker run -d -p 27017:27017 --name mongodb mongo
 ```
-- Adidas scraper
+- Adidas scraper.
 This scraper no need any mongo sever, then just run:
 ```
 scrapy crawl adidas
 ```
-- Puma scraper
+- Puma scraper.
 On the other hand, Puma crawler does need the Mongo server. Then run:
 ```
 scrapy crawl -s MONGODB_URI="mongodb://localhost:27017/" -s MONGODB_DATABASE="Products" puma
