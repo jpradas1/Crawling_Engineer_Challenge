@@ -33,7 +33,11 @@ venv\Scripts\activate
 pip install scrapy pymongo
 ```
 ### Ride Spiders
-Finally to run the scraper we make
+Before to run any spider we need a MongoDB server in order to store our data. This server could be local or on cloud. To create a local one, use docker.
+```
+sudo docker pull mongo
+sudo docker run -d -p 27017:27017 --name mongodb mongo
+```
 - Adidas scraper
 ```
 scrapy crawl adidas
