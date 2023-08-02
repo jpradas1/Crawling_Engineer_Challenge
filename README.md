@@ -33,14 +33,24 @@ venv\Scripts\activate
 pip install scrapy pymongo
 ```
 ### Ride Spiders
-Finally to run the scraper we make
+Before to run any spider we need a MongoDB server in order to store our data. This server could be local or on cloud. To create a local one, use docker.
+```
+sudo docker pull mongo
+sudo docker run -d -p 27017:27017 --name mongodb mongo
+```
 - Adidas scraper
+This scraper no need any mongo sever, then just run:
 ```
 scrapy crawl adidas
 ```
 - Puma scraper
+On the other hand, Puma crawler does need the Mongo server. Then run:
 ```
-scrapy crawl puma
+scrapy crawl -s MONGODB_URI="mongodb://localhost:27017/" -s MONGODB_DATABASE="Products" puma
+```
+And to ignore the log output
+```
+scrapy crawl -s MONGODB_URI="mongodb://localhost:27017/" -s MONGODB_DATABASE="Products" puma 2>/dev/null
 ```
 ## Dataset
 The final extrated data is located in the folder [retailing](https://github.com/jpradas1/Crawling_Engineer_Challenge/tree/main/retailing) in json format ([adidas.json](https://github.com/jpradas1/Crawling_Engineer_Challenge/blob/main/retailing/adidas.json) & [puma.json](https://github.com/jpradas1/Crawling_Engineer_Challenge/blob/main/retailing/puma.json))
